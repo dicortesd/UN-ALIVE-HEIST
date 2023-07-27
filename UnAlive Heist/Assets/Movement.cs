@@ -8,12 +8,13 @@ public class Movement : MonoBehaviour
     [SerializeField] float acceleration;
     [SerializeField] float reachedLaneTolerance = 0.1f;
     [SerializeField] float slowdownDistance = 0.5f;
+    [SerializeField] float distanceFromTrackStart;
 
     Rigidbody rigidBody;
     Track track;
     int currentLaneNumber;
 
-    Vector3 destination;
+    Vector3 destinationLaneCenter;
     Vector3 movementDirection;
     float currentSpeed;
     float maxDecceleration;
@@ -28,9 +29,15 @@ public class Movement : MonoBehaviour
     private void Start()
     {
         maxDecceleration = (maxSpeed * maxSpeed) / (2 * slowdownDistance);
+        GoToStartPosition();
+    }
+
+    private void GoToStartPosition()
+    {
         currentLaneNumber = Random.Range(1, track.GetNumberOfLanes());
-        transform.position = track.GetLane(currentLaneNumber).GetCenter();
-        destination = transform.position;
+        Vector3 laneCenter = track.GetLane(currentLaneNumber).GetCenter();
+        transform.position = track.transform.position + track.transform.forward * distanceFromTrackStart + (laneCenter - track.transform.position);
+        destinationLaneCenter = laneCenter;
     }
 
     private void FixedUpdate()
@@ -39,7 +46,7 @@ public class Movement : MonoBehaviour
         {
             UpdateCurrentSpeed();
             float deltaDistance = currentSpeed * Time.fixedDeltaTime;
-            float remainingDistance = GetRemainingDistance();
+            float remainingDistance = GetRemainingDistanceToLaneCenter();
             if (deltaDistance >= remainingDistance)
             {
                 deltaDistance = remainingDistance;
@@ -50,33 +57,11 @@ public class Movement : MonoBehaviour
         {
             currentSpeed = 0;
         }
-
-
     }
 
-
-    private bool ReachedLane()
+    public bool ReachedLane()
     {
-        return GetRemainingDistance() <= reachedLaneTolerance;
-    }
-
-    private float GetRemainingDistance()
-    {
-        return Vector3.Distance(transform.position, destination);
-    }
-
-    private void UpdateCurrentSpeed()
-    {
-        float remainingDistance = GetRemainingDistance();
-        if (remainingDistance >= slowdownDistance)
-        {
-            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.deltaTime);
-        }
-        else
-        {
-            float decceleration = Mathf.Min(maxDecceleration, acceleration);
-            currentSpeed = Mathf.MoveTowards(currentSpeed, 0, decceleration * Time.deltaTime);
-        }
+        return GetRemainingDistanceToLaneCenter() <= reachedLaneTolerance;
     }
 
     public void MoveRight()
@@ -97,6 +82,32 @@ public class Movement : MonoBehaviour
         }
     }
 
+    public int GetCurrentLaneNumber()
+    {
+        return currentLaneNumber;
+    }
+
+
+    private float GetRemainingDistanceToLaneCenter()
+    {
+        return Vector3.Distance(transform.position - track.transform.forward * distanceFromTrackStart, destinationLaneCenter);
+    }
+
+    private void UpdateCurrentSpeed()
+    {
+        float remainingDistance = GetRemainingDistanceToLaneCenter();
+        if (remainingDistance >= slowdownDistance)
+        {
+            currentSpeed = Mathf.MoveTowards(currentSpeed, maxSpeed, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            float decceleration = Mathf.Min(maxDecceleration, acceleration);
+            currentSpeed = Mathf.MoveTowards(currentSpeed, 0, decceleration * Time.deltaTime);
+        }
+    }
+
+
     private bool CanMoveToLane(int laneNumber)
     {
         return laneNumber > 0 && laneNumber <= track.GetNumberOfLanes();
@@ -105,7 +116,7 @@ public class Movement : MonoBehaviour
     private void MoveToLane(int laneNumber)
     {
         Lane lane = track.GetLane(laneNumber);
-        destination = lane.GetCenter();
+        destinationLaneCenter = lane.GetCenter();
         currentLaneNumber = laneNumber;
         print(currentLaneNumber);
     }
