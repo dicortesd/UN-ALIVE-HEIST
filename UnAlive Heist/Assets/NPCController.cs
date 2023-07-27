@@ -2,20 +2,28 @@ using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
-    Track track;
 
-    private void Awake()
-    {
-        track = FindObjectOfType<Track>();
+    Movement movement;
+
+    private void Awake() {
+        movement = GetComponent<Movement>();
     }
 
-    private void Start()
+    public void PullToLane(int laneNumber)
     {
-        InvokeRepeating(nameof(ChangeLane), 0, 2);
+        if (!movement.ReachedLane()) return;
+        if (laneNumber > movement.GetCurrentLaneNumber())
+        {
+            movement.MoveRight();
+        }
+        else if (laneNumber < movement.GetCurrentLaneNumber())
+        {
+            movement.MoveLeft();
+        }
+        else
+        {
+            //Do nothing;
+        }
     }
 
-    private void ChangeLane()
-    {
-        transform.position = track.GetRandomLane().GetCenter();
-    }
 }
