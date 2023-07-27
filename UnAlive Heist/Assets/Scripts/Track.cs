@@ -17,11 +17,6 @@ public class Track : MonoBehaviour
         }
     }
 
-    public Lane GetRandomLane()
-    {
-        return ArrayExtensions.GetRandom<Lane>(lanes);
-    }
-
     public Lane GetLane(int lane)
     {
         if (lane < 1 || lane > lanes.Length) return null;
@@ -29,7 +24,12 @@ public class Track : MonoBehaviour
 
     }
 
-    private void OnDrawGizmosSelected()
+    public int GetNumberOfLanes()
+    {
+        return lanes.Length;
+    }
+
+    private void OnDrawGizmos()
     {
         int numberOfLanes = transform.childCount;
         if (numberOfLanes > 0)
