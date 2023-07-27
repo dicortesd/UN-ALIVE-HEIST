@@ -6,28 +6,34 @@ public class LevelGenerator : MonoBehaviour
 {
     //Acceder a los prefabs que conforman el camino
     [SerializeField] private GameObject road;
-    private float timer = 0.0f;
+    private float timer ;
+    public float speed = 20f;
+    private Vector3 nextRoadSpawn;
 
-
+    public void GenerateRoad()
+    {
+        GameObject temp = Instantiate(road, nextRoadSpawn, Quaternion.identity);
+        nextRoadSpawn = temp.transform.GetChild(3).transform.position;
+    }
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(road);
+
+       GenerateRoad();
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         //Contar el tiempo que esta pasando
         timer = timer + Time.deltaTime;
 
         //Si pasaron 0.48 segundos instanciar otro camino
-        if (timer >= 0.48f)
+        if ((timer % 5) == 0)
         {
-            Instantiate(road);
-            timer = 0.0f;
+            speed++;
         }
-
-
     }
 }
