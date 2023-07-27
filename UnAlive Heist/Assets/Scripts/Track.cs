@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using ExtensionMethods;
 using UnityEngine;
 
 public class Track : MonoBehaviour
@@ -17,13 +17,15 @@ public class Track : MonoBehaviour
         }
     }
 
-    public Lane GetLane()
+    public Lane GetRandomLane()
     {
-
+        return ArrayExtensions.GetRandom<Lane>(lanes);
     }
 
     public Lane GetLane(int lane)
     {
+        if (lane < 1 || lane > lanes.Length) return null;
+        return lanes[lane - 1];
 
     }
 

@@ -48,7 +48,14 @@ namespace ExtensionMethods
     {
         public static T GetRandom<T>(T[] array)
         {
-            return array[Random.Range(0, array.Length)];
+            if (array.Length > 0)
+            {
+                return array[Random.Range(0, array.Length)];
+            }
+            else
+            {
+                return default(T);
+            }
         }
     }
 

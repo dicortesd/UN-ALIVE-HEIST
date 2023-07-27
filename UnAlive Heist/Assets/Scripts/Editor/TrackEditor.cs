@@ -1,6 +1,7 @@
 ﻿
 using System;
 using UnityEditor;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 [CustomEditor(typeof(Track))]
@@ -25,9 +26,9 @@ public class TrackEditor : Editor
 
         Track track = target as Track;
         int numberOfLanes = track.transform.childCount;
-
+        EditorGUILayout.PropertyField(lanePrefabProp);
         so.Update();
-        laneWidthProp.floatValue = EditorGUILayout.FloatField(laneWidthProp.floatValue);
+        EditorGUILayout.PropertyField(laneWidthProp);
         if (so.ApplyModifiedProperties())
         {
             OrganizeLanes(track);
@@ -47,8 +48,9 @@ public class TrackEditor : Editor
     {
         for (int i = 0; i < track.transform.childCount; i++)
         {
-            Transform laneTransform = track.transform.GetChild(i);
-            laneTransform.position = track.transform.position + track.transform.right * i * laneWidthProp.floatValue;
+            Lane lane = track.transform.GetChild(i).GetComponent<Lane>();
+            lane.transform.position = track.transform.position + track.transform.right * i * laneWidthProp.floatValue;
+            SetLaneWidth(lane.gameObject);
         }
     }
 
@@ -57,7 +59,7 @@ public class TrackEditor : Editor
         if (numberOfLanes > 0)
         {
             GameObject lastLane = track.transform.GetChild(numberOfLanes - 1).gameObject;
-            Destroy(lastLane);
+            DestroyImmediate(lastLane);
         }
     }
 
@@ -67,6 +69,13 @@ public class TrackEditor : Editor
         GameObject newLane = (GameObject)PrefabUtility.InstantiatePrefab(prefab, track.transform);
         //GameObject newLane = track.transform.GetChild(numberOfLanes).gameObject;
         newLane.transform.position = track.transform.position + track.transform.right * (numberOfLanes) * laneWidthProp.floatValue;
+        SetLaneWidth(newLane);
     }
 
+    private void SetLaneWidth(GameObject lane)
+    {
+        lane.GetComponent<Lane>().SetWidth(laneWidthProp.floatValue);
+        EditorUtility.SetDirty(lane);
+        EditorSceneManager.MarkSceneDirty(lane.scene);
+    }
 }
