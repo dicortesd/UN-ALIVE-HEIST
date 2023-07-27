@@ -471,10 +471,10 @@ RectTransform:
   - {fileID: 1189138760}
   m_Father: {fileID: 945335183}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.2931441, y: 0.04318241}
-  m_AnchorMax: {x: 0.739423, y: 0.18680054}
+  m_AnchorMin: {x: 0.27801058, y: 0.043182384}
+  m_AnchorMax: {x: 0.72198945, y: 0.18680057}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0.0000021457672, y: 0}
+  m_SizeDelta: {x: -0.00000047683716, y: 0.00000381475}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &401188876
 MonoBehaviour:
@@ -928,7 +928,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000019073486}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -9.8780365, y: -3.5025482}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &560557013
@@ -1657,8 +1657,8 @@ RectTransform:
   m_Children:
   - {fileID: 1368159683}
   - {fileID: 818665235}
-  - {fileID: 401188875}
   - {fileID: 1007066426}
+  - {fileID: 401188875}
   m_Father: {fileID: 367473628}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2875, y: 0.13999955}
@@ -1816,7 +1816,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 32.771, y: 30.213}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1081025388
 MonoBehaviour:
@@ -2024,8 +2024,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.0000038146973}
-  m_SizeDelta: {x: -9.8780365, y: -3.5025482}
+  m_AnchoredPosition: {x: -0.0001449585, y: -0.000034332275}
+  m_SizeDelta: {x: -0.00030518, y: -0.000045776}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1189138761
 MonoBehaviour:
@@ -2074,8 +2074,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 70
-  m_fontSizeBase: 70
+  m_fontSize: 60
+  m_fontSizeBase: 60
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2110,7 +2110,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0.7251816, w: 0}
+  m_margin: {x: 0, y: 0, z: 0.38663864, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
