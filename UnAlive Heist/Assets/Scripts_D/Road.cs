@@ -7,16 +7,18 @@ public class Road : MonoBehaviour
     //Variable publica por si se requiere acceder desde el generador de niveles
     //public float speed = 20.0f;
     LevelGenerator levelGenerator;
-    [SerializeField] private float speed;
-    public GameObject obstaclePrefab;
+    [SerializeField] public Transform roadEnd;
+    [SerializeField] GameObject obstaclePrefab;
+
+    private float speed = 0;
     // Start is called before the first frame update
     void Start()
     {
         //Iniciar en el origen 
-        transform.position = new Vector3(0, 0, 100);
+        //transform.position = new Vector3(0, 0, 100);
         levelGenerator = GameObject.FindObjectOfType<LevelGenerator>();
-        speed = levelGenerator.speed;
-        SpawnObstacle();
+        //speed = levelGenerator.roadSpeed;
+        //SpawnObstacle();
     }
 
     // Update is called once per frame
@@ -24,15 +26,13 @@ public class Road : MonoBehaviour
     {
         //Mover hacia atras en cada frame segun la velocidad definida
         transform.Translate(Vector3.back * speed * Time.deltaTime);
-
-
-        //Rutina para destruirse si ya llega muy atras en el mapa
-        if (transform.position.z <= -150)
-        {
-            levelGenerator.GenerateRoad();
-            Destroy(this.gameObject);
-        }
     }
+
+    public void SetSpeed(float speed)
+    {
+        this.speed = speed;
+    }
+
     void SpawnObstacle()
     {
         int obstacleSpawnIndex = Random.Range(4, 8);

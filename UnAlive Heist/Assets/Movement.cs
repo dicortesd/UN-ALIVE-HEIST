@@ -118,7 +118,6 @@ public class Movement : MonoBehaviour
         Lane lane = track.GetLane(laneNumber);
         destinationLaneCenter = lane.GetCenter();
         currentLaneNumber = laneNumber;
-        print(currentLaneNumber);
     }
 
 
