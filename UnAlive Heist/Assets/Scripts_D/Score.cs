@@ -6,7 +6,7 @@ using TMPro;
 public class Score : MonoBehaviour
 {
     private TextMeshProUGUI textMesh;
-    private int score;
+    private float score;
     private float timer;
 
     // Start is called before the first frame update
@@ -23,9 +23,15 @@ public class Score : MonoBehaviour
         timer = timer + Time.deltaTime;
 
         //Cada 0.5 segundos incrementar el score
-        if (timer >= 0.5f) {
+        if (timer >= 0.5f)
+        {
             score++;
             timer = 0.0f;
         }
+    }
+
+    public float GetScore()
+    {
+        return score;
     }
 }

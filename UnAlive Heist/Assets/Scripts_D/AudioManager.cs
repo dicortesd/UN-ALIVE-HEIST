@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
         if (instance != null)
         {
             Debug.LogError("More than one AudioManager in scene");
+            gameObject.SetActive(false);
         }
         else
         {

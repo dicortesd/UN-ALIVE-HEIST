@@ -12,7 +12,6 @@ public class ObstaclesSpawner : MonoBehaviour
     [SerializeField] float startToSpawnTime = 0f;
     [SerializeField] float distanceFromTrackStart;
     [SerializeField] float distanceToDestroy;
-    [SerializeField] float obstaclesSpeed;
     [SerializeField] GameObject obstaclesContainerPrefab;
 
     Track track;
@@ -91,7 +90,7 @@ public class ObstaclesSpawner : MonoBehaviour
             obstaclesContainer.transform.GetChild(randomIndex).gameObject.SetActive(false);
         }
 
-        obstaclesContainer.GetComponent<Rigidbody>().velocity = -vectorAwayFromTrackStart.normalized * obstaclesSpeed;
+        obstaclesContainer.GetComponent<Rigidbody>().velocity = -vectorAwayFromTrackStart.normalized * LevelManager.currentLevel.speed;
     }
 
     private bool LimitOfIndestructiblesReached()
