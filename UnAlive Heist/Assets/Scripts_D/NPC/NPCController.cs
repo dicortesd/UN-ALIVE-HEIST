@@ -5,8 +5,14 @@ public class NPCController : MonoBehaviour
 
     Movement movement;
 
-    private void Awake() {
+    private void Awake()
+    {
         movement = GetComponent<Movement>();
+    }
+
+    private void Start()
+    {
+        AudioManager.instance.PlaySound(SoundName.HorseRun);
     }
 
     public void PullToLane(int laneNumber)

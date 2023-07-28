@@ -42,6 +42,7 @@ public class Health : MonoBehaviour
         if (isDead) return;
         hits += 1;
         OnHit?.Invoke();
+        AudioManager.instance.PlaySound(SoundName.NPCHit);
         if (hits >= maxHits)
         {
             Die();

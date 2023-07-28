@@ -22,16 +22,19 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown(KEY_TO_PULL))
             {
                 NPC.PullToLane(movement.GetCurrentLaneNumber());
+                AudioManager.instance.PlaySound(SoundName.Pull);
                 return;
             }
 
             float input = Input.GetAxisRaw("Horizontal");
             if (input == 1)
             {
+                AudioManager.instance.PlaySound(SoundName.PlayerMovement);
                 movement.MoveRight();
             }
             else if (input == -1)
             {
+                AudioManager.instance.PlaySound(SoundName.PlayerMovement);
                 movement.MoveLeft();
             }
 
