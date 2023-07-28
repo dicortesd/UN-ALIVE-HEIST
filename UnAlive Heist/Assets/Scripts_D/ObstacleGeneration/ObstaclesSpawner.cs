@@ -12,9 +12,7 @@ public class ObstaclesSpawner : MonoBehaviour
 
     Track track;
 
-    int currentNumberOfDishes = 0;
     float spawnTimer = 0;
-    float checkAvailabilityTimer;
 
     float[] weights;
     Obstacle[] obstacles;
@@ -64,11 +62,6 @@ public class ObstaclesSpawner : MonoBehaviour
         Obstacle obstaclePrefab = GetRandomObstacle();
         Obstacle obstacleInstance = Instantiate<Obstacle>(obstaclePrefab, Vector3.zero, Quaternion.identity, transform);
         return obstacleInstance;
-    }
-
-    private Vector3 GetSpawnPoint()
-    {
-        throw new NotImplementedException();
     }
 
     private Obstacle GetRandomObstacle()
