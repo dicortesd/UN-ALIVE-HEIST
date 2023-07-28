@@ -44,10 +44,12 @@ public class InGameMenus : MonoBehaviour
                     Pause();
                 }
             }
+            /*
             if (Input.GetKeyDown(KeyCode.Delete))
             { //temporal en lo que se define como se pierde
                 GameOver();
             }
+            */
         }
     }
 
