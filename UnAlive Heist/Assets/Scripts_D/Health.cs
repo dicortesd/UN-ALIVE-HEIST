@@ -4,20 +4,13 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] int maxHits;
-
-    Animator animator;
+    [SerializeField] Animator animator;
 
     int hits;
     bool isDead;
 
     public Action OnDead;
     public Action OnHit;
-
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
-
     private void Start()
     {
         hits = 0;
@@ -42,7 +35,6 @@ public class Health : MonoBehaviour
         if (isDead) return;
         hits += 1;
         OnHit?.Invoke();
-        AudioManager.instance.PlaySound(SoundName.NPCHit);
         if (hits >= maxHits)
         {
             Die();
@@ -64,9 +56,7 @@ public class Health : MonoBehaviour
     private void Die()
     {
         isDead = true;
-        if (animator != null) animator.SetTrigger("Die");
         OnDead?.Invoke();
-        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision other)

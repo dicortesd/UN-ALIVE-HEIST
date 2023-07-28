@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    [SerializeField]
-    Sound[] m_sounds;
+    [SerializeField] AudioMixerGroup mainAudioMixerGroup;
+    [SerializeField] Sound[] m_sounds;
 
     private void Awake()
     {
@@ -22,7 +23,9 @@ public class AudioManager : MonoBehaviour
         {
             GameObject go = new GameObject("Sound_" + i + "_" + m_sounds[i].m_name.ToString());
             go.transform.SetParent(transform);
-            m_sounds[i].SetSource(go.AddComponent<AudioSource>());
+            AudioSource source = go.AddComponent<AudioSource>();
+            source.outputAudioMixerGroup = mainAudioMixerGroup;
+            m_sounds[i].SetSource(source);
         }
         DontDestroyOnLoad(this.gameObject);
     }
