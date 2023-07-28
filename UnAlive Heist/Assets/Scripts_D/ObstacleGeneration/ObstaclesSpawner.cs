@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using ExtensionMethods;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class ObstaclesSpawner : MonoBehaviour
 {
@@ -74,21 +75,20 @@ public class ObstaclesSpawner : MonoBehaviour
             Vector3 spawnPoint = track.GetLane(laneNumber).GetCenter() + vectorAwayFromTrackStart;
             Obstacle obstacle = SpawnObstacle();
 
-            //Prevent that all lanes have indestructible obstacles
             if (obstacle.CompareTag("Indestructible"))
             {
-                if (LimitOfIndestructiblesReached())
-                {
-                    obstacle.gameObject.SetActive(false);
-                }
-                else
-                {
-                    numberOfIndestructibles++;
-                }
+                numberOfIndestructibles++;
             }
 
             obstacle.transform.position = spawnPoint;
             obstacle.transform.SetParent(obstaclesContainer.transform);
+        }
+
+        //Prevent that all lanes have indestructible obstacles
+        if (LimitOfIndestructiblesReached())
+        {
+            int randomIndex = Random.Range(0, obstaclesContainer.transform.childCount - 1);
+            obstaclesContainer.transform.GetChild(randomIndex).gameObject.SetActive(false);
         }
 
         obstaclesContainer.GetComponent<Rigidbody>().velocity = -vectorAwayFromTrackStart.normalized * obstaclesSpeed;
