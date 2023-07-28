@@ -1,12 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     Movement movement;
     NPCController NPC;
-    public KeyCode KEY_TO_PULL = KeyCode.P;
+    public KeyCode keyToPull = KeyCode.P;
+    public KeyCode keyToPunch = KeyCode.W;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         if (movement.ReachedLane())
         {
-            if (Input.GetKeyDown(KEY_TO_PULL))
+            if (Input.GetKeyDown(keyToPull))
             {
                 NPC.PullToLane(movement.GetCurrentLaneNumber());
                 AudioManager.instance.PlaySound(SoundName.Pull);
@@ -40,5 +40,11 @@ public class PlayerController : MonoBehaviour
 
 
         }
+    }
+
+    public bool IsPunching()
+    {
+        AudioManager.instance.PlaySound(SoundName.PlayerPunch);
+        return Input.GetKeyDown(keyToPunch);
     }
 }
