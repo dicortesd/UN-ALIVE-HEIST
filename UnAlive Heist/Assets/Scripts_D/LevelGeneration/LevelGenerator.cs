@@ -32,7 +32,7 @@ public class LevelGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (DistanceToLastRoad() >= lastRoadMaxDistance)
+        if (roadsQueue.Count > 0 && DistanceToLastRoad() >= lastRoadMaxDistance)
         {
             GenerateRoad();
             DestroyLastRoad();
