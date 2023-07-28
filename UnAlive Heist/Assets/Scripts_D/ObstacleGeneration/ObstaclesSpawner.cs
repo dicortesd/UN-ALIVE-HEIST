@@ -9,6 +9,9 @@ public class ObstaclesSpawner : MonoBehaviour
     [SerializeField] float timeToSpawn;
     [SerializeField] float startToSpawnTime = 0f;
     [SerializeField] float distanceFromTrackStart;
+    [SerializeField] float distanceToDestroy;
+    [SerializeField] float obstaclesSpeed;
+    [SerializeField] GameObject obstaclesContainerPrefab;
 
     Track track;
 
@@ -49,12 +52,16 @@ public class ObstaclesSpawner : MonoBehaviour
 
     private void SpawnObstacles()
     {
+        Vector3 vectorAwayFromTrackStart = track.transform.forward * distanceFromTrackStart;
+        GameObject obstaclesContainer = Instantiate(obstaclesContainerPrefab, track.transform.position + vectorAwayFromTrackStart, Quaternion.identity, transform);
         for (int laneNumber = 1; laneNumber <= track.GetNumberOfLanes(); laneNumber++)
         {
-            Vector3 spawnPoint = track.GetLane(laneNumber).GetCenter() + track.transform.forward * distanceFromTrackStart;
+            Vector3 spawnPoint = track.GetLane(laneNumber).GetCenter() + vectorAwayFromTrackStart;
             Obstacle obstacle = SpawnObstacle();
             obstacle.transform.position = spawnPoint;
+            obstacle.transform.SetParent(obstaclesContainer.transform);
         }
+        obstaclesContainer.GetComponent<Rigidbody>().velocity = -vectorAwayFromTrackStart.normalized * obstaclesSpeed;
     }
 
     private Obstacle SpawnObstacle()

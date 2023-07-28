@@ -65,6 +65,7 @@ public class Health : MonoBehaviour
         isDead = true;
         if (animator != null) animator.SetTrigger("Die");
         OnDead?.Invoke();
+        gameObject.SetActive(false);
     }
 
     private void OnCollisionEnter(Collision other)
