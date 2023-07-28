@@ -57,6 +57,28 @@ namespace ExtensionMethods
                 return default(T);
             }
         }
+
+        public static T GetWeightedRandom<T>(float[] weights, T[] array)
+        {
+            float totalWeight = 0;
+            for (int i = 0; i < weights.Length; i++)
+            {
+                totalWeight += weights[i];
+            }
+
+            float randomNumber = Random.Range(0, totalWeight);
+            float probabilitySum = 0;
+
+            for (int i = 0; i < weights.Length; i++)
+            {
+                probabilitySum += weights[i];
+                if (randomNumber <= probabilitySum)
+                {
+                    return array[i];
+                }
+            }
+            return default(T);
+        }
     }
 
     public static class LayerMaskExtensions
