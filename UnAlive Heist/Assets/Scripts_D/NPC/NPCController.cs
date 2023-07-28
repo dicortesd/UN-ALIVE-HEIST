@@ -8,14 +8,15 @@ public class NPCController : MonoBehaviour
     Health health;
     Movement movement;
     Animator animator;
-
+    [SerializeField]CapsuleCollider capsuleCollider;
     Coroutine runSoundRoutine;
 
     private void Awake()
     {
         movement = GetComponent<Movement>();
         health = GetComponentInChildren<Health>();
-        animator = GetComponentInChildren<Animator>();
+        animator = GetComponentInChildren<Animator>(); 
+        capsuleCollider = GetComponent<CapsuleCollider>();
     }
 
     private void OnEnable()
@@ -57,7 +58,29 @@ public class NPCController : MonoBehaviour
         }
         else
         {
-            //Do nothing;
+            Jump();//
         }
+    }
+ 
+
+
+    private void Jump()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(DeactivateColliderForSeconds(2f));
+        }
+    }
+
+    private IEnumerator DeactivateColliderForSeconds(float seconds)
+    {
+        // Desactiva el collider
+        capsuleCollider.enabled = false;
+
+        // Espera durante el tiempo especificado
+        yield return new WaitForSeconds(seconds);
+
+        // Activa el collider nuevamente
+        capsuleCollider.enabled = true;
     }
 }

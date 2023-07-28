@@ -2492,9 +2492,17 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6767068839883894647, guid: d15d59aaef93dce4c8ade0303f7e8f58, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6767068839883894647, guid: d15d59aaef93dce4c8ade0303f7e8f58, type: 3}
       propertyPath: reachedLaneTolerance
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 7274745252500915202, guid: d15d59aaef93dce4c8ade0303f7e8f58, type: 3}
+      propertyPath: capsuleCollider
+      value: 
+      objectReference: {fileID: 593660046}
     - target: {fileID: 8365218098501245005, guid: d15d59aaef93dce4c8ade0303f7e8f58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 85.61438
@@ -2510,6 +2518,10 @@ PrefabInstance:
     - target: {fileID: 8489652759858441475, guid: d15d59aaef93dce4c8ade0303f7e8f58, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: -15.900434
+      objectReference: {fileID: 0}
+    - target: {fileID: 8875752890026511877, guid: d15d59aaef93dce4c8ade0303f7e8f58, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9049288699091120830, guid: d15d59aaef93dce4c8ade0303f7e8f58, type: 3}
       propertyPath: m_Enabled

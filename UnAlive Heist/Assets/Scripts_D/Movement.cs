@@ -9,6 +9,8 @@ public class Movement : MonoBehaviour
     [SerializeField] float reachedLaneTolerance = 0.1f;
     [SerializeField] float slowdownDistance = 0.5f;
     [SerializeField] float distanceFromTrackStart;
+    [SerializeField] float jumpForce = 5f; // Nueva variable para controlar la fuerza del salto
+    [SerializeField] LayerMask groundLayer;
 
     Rigidbody rigidBody;
     Track track;
@@ -18,7 +20,7 @@ public class Movement : MonoBehaviour
     Vector3 movementDirection;
     float currentSpeed;
     float maxDecceleration;
-
+    bool isGrounded;
 
     private void Awake()
     {
@@ -42,11 +44,16 @@ public class Movement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        CheckGrounded();
         if (!ReachedLane())
         {
             UpdateCurrentSpeed();
             float deltaDistance = currentSpeed * Time.fixedDeltaTime;
             float remainingDistance = GetRemainingDistanceToLaneCenter();
+            if (isGrounded && Input.GetButtonDown("Jump"))
+            {
+                Jump(); // Nuevo método para el salto
+            }
             if (deltaDistance >= remainingDistance)
             {
                 deltaDistance = remainingDistance;
@@ -58,7 +65,17 @@ public class Movement : MonoBehaviour
             currentSpeed = 0;
         }
     }
-
+    private void CheckGrounded()
+    {
+        // Realizamos un raycast hacia abajo para comprobar si el personaje está en el suelo
+        float raycastDistance = 0.2f;
+        isGrounded = Physics.Raycast(transform.position, -Vector3.up, raycastDistance, groundLayer);
+    }
+    public void Jump()
+    {
+        // Aplicamos una fuerza vertical al Rigidbody para el salto
+        rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
     public bool ReachedLane()
     {
         return GetRemainingDistanceToLaneCenter() <= reachedLaneTolerance;
