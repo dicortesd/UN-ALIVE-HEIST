@@ -1664,7 +1664,7 @@ GameObject:
   - component: {fileID: 903252532}
   - component: {fileID: 903252531}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Grass Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1751,8 +1751,8 @@ Transform:
   m_GameObject: {fileID: 903252530}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.8324, y: 0.49, z: 19.6}
-  m_LocalScale: {x: 1.0865068, y: 1, z: 4.0242}
+  m_LocalPosition: {x: 38.5007, y: 0.49, z: 44.084}
+  m_LocalScale: {x: 6.4201617, y: 1, z: 9.608433}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2030,7 +2030,7 @@ GameObject:
   - component: {fileID: 1483800532}
   - component: {fileID: 1483800531}
   m_Layer: 0
-  m_Name: Plane (1)
+  m_Name: Grass Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2117,8 +2117,8 @@ Transform:
   m_GameObject: {fileID: 1483800530}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.5638, y: 0.49, z: 19.3}
-  m_LocalScale: {x: 1.1507926, y: 1, z: 4.0242}
+  m_LocalPosition: {x: -42.3498, y: 0.49, z: 46.0483}
+  m_LocalScale: {x: 7.1079855, y: 1, z: 9.373972}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -2360,6 +2360,14 @@ PrefabInstance:
     - target: {fileID: 852904187005389988, guid: 678d7c8a2995145459fae6187602a29c, type: 3}
       propertyPath: m_Name
       value: Audio Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290989707648613087, guid: 678d7c8a2995145459fae6187602a29c, type: 3}
+      propertyPath: m_sounds.Array.data[6].pitch
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290989707648613087, guid: 678d7c8a2995145459fae6187602a29c, type: 3}
+      propertyPath: m_sounds.Array.data[6].volume
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2628093605697901109, guid: 678d7c8a2995145459fae6187602a29c, type: 3}
       propertyPath: m_LocalPosition.x
