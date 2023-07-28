@@ -12,11 +12,6 @@ public class LevelManager : MonoBehaviour
 
     private void Awake()
     {
-        score = FindObjectOfType<Score>();
-    }
-
-    private void Start()
-    {
         if (levels.Length < 1)
         {
             Debug.LogError("No levels set up");
@@ -27,6 +22,13 @@ public class LevelManager : MonoBehaviour
             currentLevel = levels[currentLevelNumber - 1];
             if (levels.Length > 1) nextLevel = levels[currentLevelNumber];
         }
+
+        score = FindObjectOfType<Score>();
+    }
+
+    private void Start()
+    {
+       
     }
 
     private void Update()
