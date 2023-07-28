@@ -6,8 +6,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] Level[] levels;
     Score score;
 
-    int currentLevelNumber;
-    public static Level currentLevel;
+    static int currentLevelNumber;
+    static Level currentLevel;
     Level nextLevel;
 
     private void Awake()
@@ -23,25 +23,36 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            currentLevelNumber = 0;
-            currentLevel = levels[0];
+            currentLevelNumber = 1;
+            currentLevel = levels[currentLevelNumber - 1];
+            if (levels.Length > 1) nextLevel = levels[currentLevelNumber];
         }
     }
 
     private void Update()
     {
         float currentScore = score.GetScore();
-        if (nextLevel != null && currentScore >= nextLevel.requiredScore)
+        if (currentLevelNumber < levels.Length && currentScore >= nextLevel.requiredScore)
         {
             AdvanceLevel();
         }
     }
 
+    public static int GetCurrentLevelNumber()
+    {
+        return currentLevelNumber;
+    }
+
+    public static Level GetCurrentLevel()
+    {
+        return currentLevel;
+    }
+
     private void AdvanceLevel()
     {
         currentLevelNumber++;
-        currentLevel = levels[currentLevelNumber];
-        nextLevel = levels[currentLevelNumber + 1];
+        currentLevel = levels[currentLevelNumber - 1];
+        if (currentLevelNumber < levels.Length) nextLevel = levels[currentLevelNumber];
     }
 
 
@@ -52,3 +63,4 @@ public class LevelManager : MonoBehaviour
         public int requiredScore;
     }
 }
+

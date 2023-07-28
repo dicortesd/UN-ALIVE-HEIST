@@ -54,7 +54,7 @@ public class LevelGenerator : MonoBehaviour
     private Road GenerateRoad()
     {
         Road newRoad = Instantiate<Road>(road, nextRoadSpawn.position, Quaternion.identity, transform);
-        newRoad.SetSpeed(LevelManager.currentLevel.speed);
+        newRoad.SetSpeed(LevelManager.GetCurrentLevel().speed);
         nextRoadSpawn = newRoad.roadEnd;
         roadsQueue.Enqueue(newRoad);
 

@@ -17,6 +17,7 @@ public class InGameMenus : MonoBehaviour
         isPaused = false;
         couldPause = true;
         Time.timeScale = 1f;
+        AudioManager.instance.PlaySound(SoundName.GameMusic);
     }
 
     private void OnEnable()
@@ -63,6 +64,7 @@ public class InGameMenus : MonoBehaviour
 
     public void ToMainMenu()
     {
+        AudioManager.instance.PlaySound(SoundName.GameMusic);
         //Regresa al menú principal
         SceneManager.LoadScene(0);
     }

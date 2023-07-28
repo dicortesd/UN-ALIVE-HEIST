@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641258, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1051,7 +1051,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2875, y: 0.13999955}
   m_AnchorMax: {x: 0.7125, y: 0.7421282}
-  m_AnchoredPosition: {x: -2.6130066, y: -18.552994}
+  m_AnchoredPosition: {x: -2.6130066, y: -18.552979}
   m_SizeDelta: {x: 446.019, y: 55.805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &401188874
@@ -1245,7 +1245,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.0001449585, y: -0.000034332275}
+  m_AnchoredPosition: {x: -0.00015258789, y: -0.000034332275}
   m_SizeDelta: {x: -0.00030518, y: -0.000045776}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &446791958
@@ -2872,7 +2872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.03873667, y: 0.560911}
   m_AnchorMax: {x: 0.8772493, y: 0.631005}
-  m_AnchoredPosition: {x: 40.389008, y: -10.299999}
+  m_AnchoredPosition: {x: 40.388977, y: -10.299999}
   m_SizeDelta: {x: 112.19, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &843055151
@@ -3330,6 +3330,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 969163652}
   m_CullTransparentMesh: 1
+--- !u!1 &991249221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 991249223}
+  - component: {fileID: 991249222}
+  m_Layer: 0
+  m_Name: AudioManagerSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &991249222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991249221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2812f6367c7a954449f873a56a17f618, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  persistentObjectPrefab: {fileID: 852904187005389988, guid: 678d7c8a2995145459fae6187602a29c, type: 3}
+--- !u!4 &991249223
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991249221}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.048897, y: 4.4604607, z: 9.1393795}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1007066425
 GameObject:
   m_ObjectHideFlags: 0
@@ -3815,7 +3860,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.2875, y: 0.13999955}
   m_AnchorMax: {x: 0.7125, y: 0.7421282}
-  m_AnchoredPosition: {x: -2.6130066, y: -18.552994}
+  m_AnchoredPosition: {x: -2.6130066, y: -18.552979}
   m_SizeDelta: {x: 446.019, y: 55.805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1217021175
@@ -4644,7 +4689,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.03871885, y: 0.4744785}
   m_AnchorMax: {x: 0.9521177, y: 0.54457253}
-  m_AnchoredPosition: {x: -15.6910095, y: -26.3}
+  m_AnchoredPosition: {x: -15.690979, y: -26.3}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1576270176
@@ -5069,7 +5114,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.03871885, y: 0.4744785}
   m_AnchorMax: {x: 0.9521177, y: 0.54457253}
-  m_AnchoredPosition: {x: -15.6910095, y: -70}
+  m_AnchoredPosition: {x: -15.690979, y: -70}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1763490334
@@ -6235,3 +6280,4 @@ SceneRoots:
   - {fileID: 735974300}
   - {fileID: 367473628}
   - {fileID: 719872785}
+  - {fileID: 991249223}

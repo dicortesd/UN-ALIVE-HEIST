@@ -7,45 +7,37 @@ using Random = UnityEngine.Random;
 
 public class ObstaclesSpawner : MonoBehaviour
 {
-    [SerializeField] ObstacleSpawnInfo[] obstaclesToSpawn;
-    [SerializeField] float timeToSpawn;
+    [SerializeField] LevelValue<ObstaclesSpawnInfo> obstaclesToSpawn;
+    [SerializeField] LevelValue<float> timeToSpawn;
     [SerializeField] float startToSpawnTime = 0f;
     [SerializeField] float distanceFromTrackStart;
     [SerializeField] float distanceToDestroy;
     [SerializeField] GameObject obstaclesContainerPrefab;
 
+
     Track track;
 
     float spawnTimer = 0;
-    float[] weights;
-    Obstacle[] obstacles;
     int numberOfIndestructibles;
     Queue<GameObject> containersQueue;
 
     [Serializable]
-    private class ObstacleSpawnInfo
+    private class ObstaclesSpawnInfo
     {
-        public Obstacle obstacle;
-        public float weight;
+        public Obstacle[] obstacles;
+        public float[] weights;
     }
 
     private void Awake()
     {
         containersQueue = new Queue<GameObject>();
         track = FindObjectOfType<Track>();
-        weights = new float[obstaclesToSpawn.Length];
-        obstacles = new Obstacle[obstaclesToSpawn.Length];
-        for (int i = 0; i < obstaclesToSpawn.Length; i++)
-        {
-            weights[i] = obstaclesToSpawn[i].weight;
-            obstacles[i] = obstaclesToSpawn[i].obstacle;
-        }
     }
 
     private void Update()
     {
         spawnTimer += Time.deltaTime;
-        if (spawnTimer >= timeToSpawn + startToSpawnTime)
+        if (spawnTimer >= timeToSpawn.GetValue() + startToSpawnTime)
         {
             SpawnObstacles();
             spawnTimer = startToSpawnTime;
@@ -90,7 +82,7 @@ public class ObstaclesSpawner : MonoBehaviour
             obstaclesContainer.transform.GetChild(randomIndex).gameObject.SetActive(false);
         }
 
-        obstaclesContainer.GetComponent<Rigidbody>().velocity = -vectorAwayFromTrackStart.normalized * LevelManager.currentLevel.speed;
+        obstaclesContainer.GetComponent<Rigidbody>().velocity = -vectorAwayFromTrackStart.normalized * LevelManager.GetCurrentLevel().speed;
     }
 
     private bool LimitOfIndestructiblesReached()
@@ -107,7 +99,8 @@ public class ObstaclesSpawner : MonoBehaviour
 
     private Obstacle GetRandomObstacle()
     {
-        return ArrayExtensions.GetWeightedRandom<Obstacle>(weights, obstacles);
+        ObstaclesSpawnInfo currentObstaclesToSpawn = obstaclesToSpawn.GetValue();
+        return ArrayExtensions.GetWeightedRandom<Obstacle>(currentObstaclesToSpawn.weights, currentObstaclesToSpawn.obstacles);
     }
 
     private bool IsContainerTooFar(GameObject container)
