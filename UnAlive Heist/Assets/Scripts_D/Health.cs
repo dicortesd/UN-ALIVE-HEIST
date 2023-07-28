@@ -4,7 +4,6 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] int maxHits;
-    [SerializeField] Animator animator;
 
     int hits;
     bool isDead;

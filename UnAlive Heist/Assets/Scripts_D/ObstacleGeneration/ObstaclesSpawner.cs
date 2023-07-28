@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using ExtensionMethods;
 using UnityEngine;
 
@@ -16,10 +17,10 @@ public class ObstaclesSpawner : MonoBehaviour
     Track track;
 
     float spawnTimer = 0;
-
     float[] weights;
     Obstacle[] obstacles;
-
+    int numberOfIndestructibles;
+    Queue<GameObject> containersQueue;
 
     [Serializable]
     private class ObstacleSpawnInfo
@@ -30,6 +31,7 @@ public class ObstaclesSpawner : MonoBehaviour
 
     private void Awake()
     {
+        containersQueue = new Queue<GameObject>();
         track = FindObjectOfType<Track>();
         weights = new float[obstaclesToSpawn.Length];
         obstacles = new Obstacle[obstaclesToSpawn.Length];
@@ -48,20 +50,53 @@ public class ObstaclesSpawner : MonoBehaviour
             SpawnObstacles();
             spawnTimer = startToSpawnTime;
         }
+
+        if (containersQueue.Count > 0)
+        {
+            GameObject lastContainer = containersQueue.Peek();
+            if (lastContainer != null && IsContainerTooFar(lastContainer))
+            {
+                containersQueue.Dequeue();
+                Destroy(lastContainer);
+            }
+        }
     }
 
     private void SpawnObstacles()
     {
         Vector3 vectorAwayFromTrackStart = track.transform.forward * distanceFromTrackStart;
         GameObject obstaclesContainer = Instantiate(obstaclesContainerPrefab, track.transform.position + vectorAwayFromTrackStart, Quaternion.identity, transform);
+        containersQueue.Enqueue(obstaclesContainer);
+
+        numberOfIndestructibles = 0;
         for (int laneNumber = 1; laneNumber <= track.GetNumberOfLanes(); laneNumber++)
         {
             Vector3 spawnPoint = track.GetLane(laneNumber).GetCenter() + vectorAwayFromTrackStart;
             Obstacle obstacle = SpawnObstacle();
+
+            //Prevent that all lanes have indestructible obstacles
+            if (obstacle.CompareTag("Indestructible"))
+            {
+                if (LimitOfIndestructiblesReached())
+                {
+                    obstacle.gameObject.SetActive(false);
+                }
+                else
+                {
+                    numberOfIndestructibles++;
+                }
+            }
+
             obstacle.transform.position = spawnPoint;
             obstacle.transform.SetParent(obstaclesContainer.transform);
         }
+
         obstaclesContainer.GetComponent<Rigidbody>().velocity = -vectorAwayFromTrackStart.normalized * obstaclesSpeed;
+    }
+
+    private bool LimitOfIndestructiblesReached()
+    {
+        return numberOfIndestructibles >= track.GetNumberOfLanes() - 1;
     }
 
     private Obstacle SpawnObstacle()
@@ -74,5 +109,11 @@ public class ObstaclesSpawner : MonoBehaviour
     private Obstacle GetRandomObstacle()
     {
         return ArrayExtensions.GetWeightedRandom<Obstacle>(weights, obstacles);
+    }
+
+    private bool IsContainerTooFar(GameObject container)
+    {
+        Vector3 fromTrackToContainer = container.transform.position - track.transform.position;
+        return Vector3.Dot(fromTrackToContainer, track.transform.forward) < 0 && (fromTrackToContainer.sqrMagnitude > distanceToDestroy * distanceToDestroy);
     }
 }
