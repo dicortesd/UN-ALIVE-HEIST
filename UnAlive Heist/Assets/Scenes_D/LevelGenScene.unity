@@ -2703,7 +2703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4135998278685424445, guid: 9d35c66b939749a49b9211e1449c0c15, type: 3}
       propertyPath: distanceFromTrackStart
-      value: 2.5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6755731292259733916, guid: 9d35c66b939749a49b9211e1449c0c15, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3105,6 +3105,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenuUI: {fileID: 1308263027}
   gameOverUI: {fileID: 706298100}
+  NPC: {fileID: 593660045}
+  timeToDisplayGameOver: 3
 --- !u!114 &2141294144
 MonoBehaviour:
   m_ObjectHideFlags: 0

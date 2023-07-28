@@ -35,6 +35,8 @@ public class NPCController : MonoBehaviour
 
     private void OnDead()
     {
+
+        AudioManager.instance.PlaySound(SoundName.NPCHit);
         animator.SetBool("Dead", true);
     }
 
