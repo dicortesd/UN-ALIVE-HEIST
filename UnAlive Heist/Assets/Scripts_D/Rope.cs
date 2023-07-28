@@ -5,8 +5,8 @@ using UnityEngine;
 public class Rope : MonoBehaviour
 {
     LineRenderer lineRenderer;
-    [SerializeField] GameObject player;
-    [SerializeField] GameObject NPC;
+    [SerializeField] Transform start;
+    [SerializeField] Transform end;
 
     private void Awake()
     {
@@ -20,6 +20,6 @@ public class Rope : MonoBehaviour
 
     private void Update()
     {
-        lineRenderer.SetPositions(new Vector3[] { player.transform.position, NPC.transform.position });
+        lineRenderer.SetPositions(new Vector3[] { start.position, end.position });
     }
 }
