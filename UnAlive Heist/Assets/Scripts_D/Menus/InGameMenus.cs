@@ -18,7 +18,7 @@ public class InGameMenus : MonoBehaviour
 
     void Update() {
         if (couldPause){
-            if (Input.GetKeyDown(KeyCode.Return)){
+            if (Input.GetKeyDown(KeyCode.Backspace)){
             //Debug.Log("key...");
                 if(isPaused){
                 Resume();
