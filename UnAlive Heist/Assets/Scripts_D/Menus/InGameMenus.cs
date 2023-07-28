@@ -5,6 +5,7 @@ public class InGameMenus : MonoBehaviour
 {
     public static bool isPaused;
     public static bool couldPause;
+    [SerializeField] Score score;
     [SerializeField] GameObject pauseMenuUI;
     [SerializeField] GameObject gameOverUI;
     [SerializeField] Health NPC;
@@ -56,6 +57,7 @@ public class InGameMenus : MonoBehaviour
     private void OnNPCDead()
     {
         Invoke(nameof(GameOver), timeToDisplayGameOver);
+        score.stop();
     }
 
 
