@@ -76,9 +76,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 15
   acceleration: 40
-  reachedLaneTolerance: 0.5
-  slowdownDistance: 2
-  distanceFromTrackStart: 5
+  reachedLaneTolerance: 0.1
+  slowdownDistance: 0.5
+  distanceFromTrackStart: 3
+  jumpForce: 5
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &8264573948021157238
 MonoBehaviour:
   m_ObjectHideFlags: 0

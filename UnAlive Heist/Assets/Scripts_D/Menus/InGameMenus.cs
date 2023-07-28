@@ -64,7 +64,7 @@ public class InGameMenus : MonoBehaviour
 
     public void ToMainMenu()
     {
-        AudioManager.instance.PlaySound(SoundName.GameMusic);
+        AudioManager.instance.StopSound(SoundName.GameMusic);
         //Regresa al menú principal
         SceneManager.LoadScene(0);
     }
