@@ -34,6 +34,11 @@ public class ObstaclesSpawner : MonoBehaviour
         track = FindObjectOfType<Track>();
     }
 
+    private void Start()
+    {
+        spawnTimer = timeToSpawn.GetValue();
+    }
+
     private void Update()
     {
         spawnTimer += Time.deltaTime;
