@@ -5,15 +5,18 @@ using TMPro;
 
 public class Score : MonoBehaviour
 {
-    private TextMeshProUGUI textMesh;
-    private float score;
+    private TextMeshProUGUI scoretextMesh;
+    [SerializeField] TextMeshProUGUI recordtextMesh;
+    private int record;
+    private int score;
     private float timer;
     private bool count;
 
     // Start is called before the first frame update
     void Start()
     {
-        textMesh = GetComponent<TextMeshProUGUI>();
+        scoretextMesh = GetComponent<TextMeshProUGUI>();
+        record = PlayerPrefs.GetInt("Record");
         score = 0;
         count = true;
     }
@@ -22,7 +25,8 @@ public class Score : MonoBehaviour
     void Update()
     {
         if (count){
-            textMesh.text = score.ToString();
+            scoretextMesh.text = $"score: {score.ToString()}";
+            recordtextMesh.text = $"record: {record.ToString()}";
             timer = timer + Time.deltaTime;
 
         //Cada 0.5 segundos incrementar el score
@@ -30,6 +34,13 @@ public class Score : MonoBehaviour
             {
                 score++;
                 timer = 0.0f;
+
+                //Verificar si se supero el record y actualizarlo en caso de ser necesario
+                if (score > record) {
+                    record = score;
+                    PlayerPrefs.SetInt("Record", record);
+
+                }
             }
         }
     }
