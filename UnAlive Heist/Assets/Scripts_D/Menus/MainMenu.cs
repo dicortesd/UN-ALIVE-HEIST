@@ -4,13 +4,12 @@ public class MainMenu : MonoBehaviour
 {
     private void Start()
     {
-        AudioManager.instance.PlaySound(SoundName.MenuMusic);
+        //AudioManager.instance.PlaySound(SoundName.MenuMusic);
     }
 
     public void PlayGame()
     {
-        AudioManager.instance.StopSound(SoundName.MenuMusic);
-        //pendiente de añadir la siguiente escena colocada una de ejemplo
+        //AudioManager.instance.StopSound(SoundName.MenuMusic);
         SceneManager.LoadScene(1);
     }
     public void QuitGame()
