@@ -7,6 +7,7 @@ public class LevelManager : MonoBehaviour
     Score score;
 
     static int currentLevelNumber;
+    static int numberOfLevels;
     static Level currentLevel;
     Level nextLevel;
 
@@ -21,6 +22,7 @@ public class LevelManager : MonoBehaviour
             currentLevelNumber = 1;
             currentLevel = levels[currentLevelNumber - 1];
             if (levels.Length > 1) nextLevel = levels[currentLevelNumber];
+            numberOfLevels = levels.Length;
         }
 
         score = FindObjectOfType<Score>();
@@ -28,7 +30,7 @@ public class LevelManager : MonoBehaviour
 
     private void Start()
     {
-       
+
     }
 
     private void Update()
@@ -48,6 +50,11 @@ public class LevelManager : MonoBehaviour
     public static Level GetCurrentLevel()
     {
         return currentLevel;
+    }
+
+    public static int GetNumberOfLevels()
+    {
+        return numberOfLevels;
     }
 
     private void AdvanceLevel()

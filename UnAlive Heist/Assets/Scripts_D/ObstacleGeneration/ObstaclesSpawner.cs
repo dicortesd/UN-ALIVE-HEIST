@@ -79,7 +79,6 @@ public class ObstaclesSpawner : MonoBehaviour
             obstacle.transform.position = spawnPoint;
             obstacle.transform.SetParent(obstaclesContainer.transform);
         }
-        print(numberOfIndestructibles);
 
         //Prevent that all lanes have indestructible obstacles
         if (LimitOfIndestructiblesReached())
