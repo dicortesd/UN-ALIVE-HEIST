@@ -1,12 +1,12 @@
-using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     Movement movement;
     NPCController NPC;
-    public KeyCode keyToPull = KeyCode.P;
-    public KeyCode keyToPunch = KeyCode.W;
+    [SerializeField] KeyCode keyToPull = KeyCode.P;
+    [SerializeField] KeyCode keyToPunch = KeyCode.W;
+    [SerializeField] KeyCode keyToCallJump = KeyCode.Space;
 
     private void Awake()
     {
@@ -37,14 +37,29 @@ public class PlayerController : MonoBehaviour
                 AudioManager.instance.PlaySound(SoundName.PlayerMovement);
                 movement.MoveLeft();
             }
-
-
         }
+
     }
 
-    public bool IsPunching()
+    public bool PunchThrown()
     {
-        AudioManager.instance.PlaySound(SoundName.PlayerPunch);
-        return Input.GetKeyDown(keyToPunch);
+        if (movement.ReachedLane() && Input.GetKeyDown(keyToPunch))
+        {
+            AudioManager.instance.PlaySound(SoundName.PlayerPunch);
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool JumpCalled()
+    {
+        if (movement.ReachedLane() && Input.GetKeyDown(keyToCallJump))
+        {
+            AudioManager.instance.PlaySound(SoundName.PlayerShout);
+            return true;
+        }
+
+        return false;
     }
 }

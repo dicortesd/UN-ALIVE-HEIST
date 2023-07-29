@@ -1,22 +1,25 @@
-using System;
+
 using System.Collections;
+using ExtensionMethods;
 using UnityEngine;
 
 public class NPCController : MonoBehaviour
 {
 
+    Collider myCollider;
     Health health;
     Movement movement;
     Animator animator;
-    [SerializeField]CapsuleCollider capsuleCollider;
     Coroutine runSoundRoutine;
+
+    bool jumping = false;
 
     private void Awake()
     {
         movement = GetComponent<Movement>();
         health = GetComponentInChildren<Health>();
-        animator = GetComponentInChildren<Animator>(); 
-        capsuleCollider = GetComponent<CapsuleCollider>();
+        animator = GetComponentInChildren<Animator>();
+        myCollider = GetComponent<Collider>();
     }
 
     private void OnEnable()
@@ -25,14 +28,11 @@ public class NPCController : MonoBehaviour
         health.OnDead += OnDead;
     }
 
-
-
     private void OnDisable()
     {
         health.OnHit -= OnHitObstacle;
         health.OnDead -= OnDead;
     }
-
 
     private void OnDead()
     {
@@ -47,7 +47,7 @@ public class NPCController : MonoBehaviour
 
     public void PullToLane(int laneNumber)
     {
-        if (!movement.ReachedLane()) return;
+        if (!movement.ReachedLane() || jumping) return;
         if (laneNumber > movement.GetCurrentLaneNumber())
         {
             movement.MoveRight();
@@ -56,31 +56,22 @@ public class NPCController : MonoBehaviour
         {
             movement.MoveLeft();
         }
-        else
-        {
-            Jump();//
-        }
-    }
- 
-
-
-    private void Jump()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartCoroutine(DeactivateColliderForSeconds(2f));
-        }
     }
 
-    private IEnumerator DeactivateColliderForSeconds(float seconds)
+    public void Jump()
     {
-        // Desactiva el collider
-        capsuleCollider.enabled = false;
 
-        // Espera durante el tiempo especificado
-        yield return new WaitForSeconds(seconds);
+        StartCoroutine(JumpRoutine());
+    }
 
-        // Activa el collider nuevamente
-        capsuleCollider.enabled = true;
+    private IEnumerator JumpRoutine()
+    {
+        jumping = true;
+        myCollider.enabled = false;
+        animator.SetTrigger("Jump");
+        AudioManager.instance.PlaySound(SoundName.NPCJump);
+        yield return AnimatorExtensions.WaitForCurrentAnimatorState(animator, 0);
+        myCollider.enabled = true;
+        jumping = false;
     }
 }

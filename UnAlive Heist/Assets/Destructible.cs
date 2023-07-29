@@ -8,27 +8,33 @@ public class Destructible : Obstacle
     [SerializeField] Collider hitBox;
     [SerializeField] Animator animator;
 
-    DestructibleTrigger destructibleTrigger;
+    PlayerTrigger playerTrigger;
+
+    bool broken = false;
 
     private void Awake()
     {
-        destructibleTrigger = GetComponentInChildren<DestructibleTrigger>();
+        playerTrigger = GetComponentInChildren<PlayerTrigger>();
     }
 
     private void OnEnable()
     {
-        destructibleTrigger.OnPlayerPunched += OnPlayerPunched;
+        playerTrigger.OnPlayerStay += OnPlayerStay;
     }
 
     private void OnDisable()
     {
-        destructibleTrigger.OnPlayerPunched -= OnPlayerPunched;
+        playerTrigger.OnPlayerStay -= OnPlayerStay;
     }
 
-    private void OnPlayerPunched()
+    private void OnPlayerStay(PlayerController player)
     {
-        hitBox.enabled = false;
-        animator.SetTrigger("Break");
+        if (!broken && player.PunchThrown())
+        {
+            hitBox.enabled = false;
+            animator.SetTrigger("Break");
+            broken = true;
+        }
     }
 
 }

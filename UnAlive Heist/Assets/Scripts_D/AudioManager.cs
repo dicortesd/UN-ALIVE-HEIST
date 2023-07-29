@@ -152,6 +152,7 @@ public enum SoundName
 {
     Pull,
     NPCJump,
+    PlayerShout,
     ObstacleBreak,
     HorseRun,
     NPCHit,
