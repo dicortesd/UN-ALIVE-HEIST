@@ -3307,10 +3307,10 @@ MonoBehaviour:
       - 100
       - 100
       - 100
-      - 25
+      - 10
   timeToSpawn:
     valuesByLevel:
-    - 3.5
+    - 2.5
   startToSpawnTime: 0
   distanceFromTrackStart: 80
   distanceToDestroy: 40

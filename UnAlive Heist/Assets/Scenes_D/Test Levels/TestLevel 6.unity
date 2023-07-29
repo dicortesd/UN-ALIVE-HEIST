@@ -3305,7 +3305,7 @@ MonoBehaviour:
       - {fileID: -8689938976077204043, guid: 158d922ddcc1e85439d7efe86152691c, type: 3}
       weights:
       - 100
-      - 100
+      - 150
       - 100
       - 25
   timeToSpawn:
