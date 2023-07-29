@@ -859,6 +859,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1959399820504464464, guid: 2af95e24d8ceb474b982708b995192ac, type: 3}
+      propertyPath: levels.Array.data[0].speed
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959399820504464464, guid: 2af95e24d8ceb474b982708b995192ac, type: 3}
       propertyPath: levels.Array.data[1].requiredScore
       value: 30
       objectReference: {fileID: 0}
@@ -3295,14 +3299,16 @@ MonoBehaviour:
   obstaclesToSpawn:
     valuesByLevel:
     - obstacles:
-      - {fileID: 1704917568415542376, guid: cff2b38a948e945489ab663957312528, type: 3}
       - {fileID: -8689938976077204043, guid: 158d922ddcc1e85439d7efe86152691c, type: 3}
+      - {fileID: 1704917568415542376, guid: db7d908c76ca54a42b025108444a87e1, type: 3}
+      - {fileID: 7835931007996842311, guid: cff2b38a948e945489ab663957312528, type: 3}
       weights:
+      - 25
       - 100
       - 100
   timeToSpawn:
     valuesByLevel:
-    - 5
+    - 3
   startToSpawnTime: 0
   distanceFromTrackStart: 80
   distanceToDestroy: 40
