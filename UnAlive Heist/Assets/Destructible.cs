@@ -7,6 +7,8 @@ public class Destructible : Obstacle
 {
     [SerializeField] Collider hitBox;
     [SerializeField] Animator animator;
+    [SerializeField] GameObject interactionIndicator;
+
 
     PlayerTrigger playerTrigger;
 
@@ -29,11 +31,16 @@ public class Destructible : Obstacle
 
     private void OnPlayerStay(PlayerController player)
     {
-        if (!broken && player.PunchThrown())
+        if (!broken)
         {
-            hitBox.enabled = false;
-            animator.SetTrigger("Break");
-            broken = true;
+            interactionIndicator.SetActive(true);
+            if (player.PunchThrown())
+            {
+                interactionIndicator.SetActive(false);
+                hitBox.enabled = false;
+                animator.SetTrigger("Break");
+                broken = true;
+            }
         }
     }
 

@@ -7,6 +7,7 @@ public class JumpObstacle : Obstacle
 {
     [SerializeField] NPCTrigger NPCTrigger;
     [SerializeField] PlayerTrigger playerTrigger;
+    [SerializeField] GameObject interactionIndicator;
 
     bool jumpEnabled = false;
 
@@ -24,9 +25,14 @@ public class JumpObstacle : Obstacle
 
     private void OnPlayerStay(PlayerController player)
     {
-        if (!jumpEnabled && player.JumpCalled())
+        if (!jumpEnabled)
         {
-            jumpEnabled = true;
+            interactionIndicator.SetActive(true);
+            if (player.JumpCalled())
+            {
+                interactionIndicator.SetActive(false);
+                jumpEnabled = true;
+            }
         }
     }
 

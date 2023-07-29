@@ -860,7 +860,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1959399820504464464, guid: 2af95e24d8ceb474b982708b995192ac, type: 3}
       propertyPath: levels.Array.data[0].speed
-      value: 17.5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 1959399820504464464, guid: 2af95e24d8ceb474b982708b995192ac, type: 3}
       propertyPath: levels.Array.data[1].requiredScore
@@ -3310,7 +3310,7 @@ MonoBehaviour:
       - 25
   timeToSpawn:
     valuesByLevel:
-    - 3.5
+    - 2.5
   startToSpawnTime: 0
   distanceFromTrackStart: 80
   distanceToDestroy: 40
